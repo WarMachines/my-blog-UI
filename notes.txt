@@ -1,0 +1,15 @@
+1. Setting-up react
+    a. npx create-react-app "folder name". (run this command to create the react project)
+    b. npm start (To run the project).
+
+2. Set Up Routes using three imports from 'react-router-dom'
+    a. BrowserRouter
+    b. Route
+    c. Switch
+    Here BrowserRouter is the parent element for all the Routes( look into App.js of front end)
+    Each Route element has path (what path is reqested from the browser) and component (what page should be shown on the Route)
+
+3. Link the pages which basically means assign links to element to Route
+    a. This can done using normal anchor link.
+    b. Or in react we have Link control which can be imported from 'react-router-dom (look into NavBar.js file)
+
