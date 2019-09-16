@@ -8,8 +8,42 @@
     c. Switch
     Here BrowserRouter is the parent element for all the Routes( look into App.js of front end)
     Each Route element has path (what path is reqested from the browser) and component (what page should be shown on the Route)
+    Use exact keyword to match exact( like we have for home page)
 
-3. Link the pages which basically means assign links to element to Route
+3. Pages on react app
+    a. const name = () => ( <h1> </h1>) (as example)
+    b. export default name (this will enable it to be used somewhere else)
+    c. React does not allow to return more than one element at the same level, either put all the element in a div (which cause to clitter or put extra div) or use fragment as <React.Fragment></React.Fragment> shorthand as <></>, React will remove these fragments automatically on rendering
+    d. how to print this page, use import name from "path to your page or component"
+
+4. Link the pages which basically means assign links to element to Route
     a. This can done using normal anchor link.
     b. Or in react we have Link control which can be imported from 'react-router-dom (look into NavBar.js file)
+
+5. Parameters
+    a. Url Parameters 
+        1. use as :parameter (example if a page using name parameter as /articles/:name, this opens article page for article with name=name) (see NavBar.js how we have passed the paramters)
+        2. Access this params by passing match to match the parameter in the react page, component as (See ArticlePage.js, how to grab the parameter from url)
+            const ArticlePage = ( { match} ) (
+                const name = match.params.name
+            )
+        
+6. Map utility of react for enumerable objects such as array
+    1. Use map to iterate over (like for each) each item in the array
+    2. map required to pass key and map that key in any of the element(likely to be parent)
+    3. example
+        const arr = { "saurabh", "chauhan"}
+        (arr.map((name, key) => (
+            <div key={key}>
+                {name}
+            </div>
+        )))    
+
+7. Component as reusable parts, which usually being used on multiple place in web application
+    a. Create just like any page we have creating till now
+    b. Argument passing to component, to pass data depending on the required place
+    c. example
+        const component = ( { argument1, argument2 }) => () (this is how our component accept arguments)
+        <component argument1 = {data1} argument2 = { data2 }></component>  (this is how we pass arguments required by the component, ofcourse import the component first)
+
 
