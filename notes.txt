@@ -47,3 +47,94 @@
         <component argument1 = {data1} argument2 = { data2 }></component>  (this is how we pass arguments required by the component, ofcourse import the component first)
 
 
+from here its being about connecting react back to backend calls
+
+8. Library Fetch
+    a. get signature
+        const result = fetch(endpoint, {
+            method : 'get'
+        })
+        or we can remove second paramter all together by default it will act as get
+        const result = fetch(endpoint)
+    b. Post
+        const result = fetch(endpoint, {
+            method : 'post',
+            body : {},
+            headers : {
+                'Content-Type' : 'application/json'
+            }
+        })
+    c. fetch is inbuild function, so we do not need to import it except in internet explorer
+    d. for it to work in IE do following
+        a. npm install --save whatwg-fetch
+        b. go to index.js file and import 'whatwg-fetch' ( so its available through out the application)
+    
+9. Enable react to have state(to store information) without using class notations
+    a. import { useState } from 'react'
+    b. const [articleInfo, setArticleInfo] = useState('')
+        1. articleInfo is the property
+        2. setArticleInfo is to set value of articleInfo
+        3. useState initiated with empty value (pass another value if you want it to initiated with diffrent value)
+    
+10. useEffect function
+    a. call every time property change to whom it is watching
+    b. import useEffect from 'react'
+    c call as   (pass a function callback)
+        1. default call (will continuous run if any update is made on component )
+            useEffect(() => {
+                setArticleInfo(10)
+            })
+        2. to not run continuous
+            useEffect(() => {
+                setArticleInfo(10)
+            }, [])          // pass the second argument as empty array ( this array says what value to watch in this case nothing so it wont update the value)
+        3. Run for changes made on specific properties
+            useEffect(() => {
+                setArticleInfo(10)
+            }, [name])       // now it will run when name property changes
+        4. We can not pass an async function in useEffect it will give error
+        5. Create async function inside the function passed in useEffect as:
+            useEffect( () => {
+                const fetchData = async () => {
+                    const result = await fetch(endpoint, {paramters})
+                    const body = await result.json();
+                    setArticleInfo(body);
+                }
+                fetchData();
+            }, [name]);
+
+11. Resolve CORS issue for local development
+    a. open package.json file
+    b. insert a property as proxy with the address of api server(local development) as
+        "proxy" : "http://localhost:8000/"
+    c. now pass the endpoint with out the base address
+
+12. Working with inputs with useState
+    a. set value attribute in input tag to useState property and onchange call the setArticleInfo with event.target.value as
+        <input type="text" value = {articleInfo} onChange = { () => setArticleInfo(event.target.value)} />
+
+
+Build App(front end React APP):
+
+1. Make changes into names, short names in index.html page in public folder and manifest.js file
+2. npm run build (for react app)
+3. copy build folder into backend project into src directory
+
+Changes on the backend file
+
+1. change to make in server.js file for letting backend from where to serve static files such as image
+    a. import path from 'path' (no need to install as its in default node package)
+    b. app.use(express.static(path.join(__dirname, '/build')))
+2. Another route to add for front file to run from same project as we are deploying front end project with backend project (on the same server)
+    a. This must be ast route
+        app.get('*', (req, res) => {
+            res.sendFile(path.join(__dirname + '/build/index.html'))
+        });
+    
+    this will serve the front end files, which mean all the request that do not match with any route mentioned in server.js serve that from this location
+
+
+
+
+
+
