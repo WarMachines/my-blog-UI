@@ -4,7 +4,7 @@ const AddCommentForm = ( { articleName, setArticleInfo}) => {
 
     const [username, setUserName] = useState('');
     const [commentText, setCommentText] = useState('');
-    const addCOmment = async () => {
+    const addComment = async () => {
         const result = await fetch(`/api/articles/${articleName}/add-comment`, {
             method : 'post',
             body : JSON.stringify({ username, text : commentText}),
@@ -30,7 +30,7 @@ const AddCommentForm = ( { articleName, setArticleInfo}) => {
                 Comment:
                 <textarea rows="4" cols="50" value = {commentText} onChange = { (event) => setCommentText(event.target.value)}></textarea>
             </label>
-            <button onClick = { ()=> addCOmment()}>Add Comment</button>
+            <button onClick = { ()=> addComment()}>Add Comment</button>
         </div>
 
     );
